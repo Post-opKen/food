@@ -31,6 +31,12 @@ $f3->route('GET /breakfast', function(){
     echo $view->render('views/breakfast.html');
 });
 
+//define a pancakes route
+$f3->route('GET /breakfast/pancakes', function(){
+    $view = new View();
+    echo $view->render('views/pancakes.html');
+});
+
 //define a lunch route
 $f3->route('GET /lunch', function(){
     $view = new View();
