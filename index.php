@@ -25,28 +25,10 @@ $f3->route('GET /', function(){
     echo $view->render('views/home.html');
 });
 
-//define a breakfast route
-$f3->route('GET /breakfast', function(){
-    $view = new View();
-    echo $view->render('views/breakfast.html');
-});
-
 //define a pancakes route
 $f3->route('GET /breakfast/pancakes', function(){
     $view = new View();
     echo $view->render('views/pancakes.html');
-});
-
-//define a lunch route
-$f3->route('GET /lunch', function(){
-    $view = new View();
-    echo $view->render('views/lunch.html');
-});
-
-//define a dinner route
-$f3->route('GET /dinner', function(){
-    $view = new View();
-    echo $view->render('views/dinner.html');
 });
 
 //define a veg burger route
@@ -54,15 +36,28 @@ $f3->route('GET /dinner/vegburger', function(){
     $view = new View();
     echo $view->render('views/veg-burger.html');
 });
+
 //define a burrito route
 $f3->route('GET /dinner/burrito', function(){
     $view = new View();
     echo $view->render('views/burrito.html');
 });
+
 //define a pizza route
 $f3->route('GET /dinner/pizza', function(){
     $view = new View();
     echo $view->render('views/pizza.html');
+});
+
+//route with a parameter
+$f3->route('GET /@meal', function($f3, $params){
+    $view = new View();
+    echo $view->render('views/' . $params['meal'] . '.html');
+});
+
+//define a route with multiple parameters
+$f3->route('GET /@meal/@food', function($f3, $params){
+    echo "<h3>I like {$params['food']} for {$params['meal']}.</h3>";
 });
 
 //run fat free
