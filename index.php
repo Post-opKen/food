@@ -88,5 +88,21 @@ $f3->route('POST /order-process', function(){
     echo "Processing Order";
 });
 
+//define a route for desserts
+$f3->route('GET /dessert/@dessert', function($f3, $params){
+    $desserts = ["cake", "cookies", "brownies"];
+    if($params['dessert'] == 'pie')
+    {
+        $view = new View();
+        echo $view->render('views/pie.html');
+    }
+    elseif (in_array($params['dessert'], $desserts))
+    {
+        echo "I like {$params['dessert']} for dessert.";
+    }else{
+        $f3->error(404);
+    }
+});
+
 //run fat free
 $f3->run();
