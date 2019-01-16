@@ -20,7 +20,6 @@ $f3->set('DEBUG', 3);
 
 //define a default route
 $f3->route('GET /', function(){
-    //echo "<h1>My Fav Foods</h1>";
     $view = new View;
     echo $view->render('views/home.html');
 });
@@ -57,7 +56,36 @@ $f3->route('GET /@meal', function($f3, $params){
 
 //define a route with multiple parameters
 $f3->route('GET /@meal/@food', function($f3, $params){
-    echo "<h3>I like {$params['food']} for {$params['meal']}.</h3>";
+    $validMeals = ["breakfast", "lunch", "dinner"];
+
+    //check validity
+    if(!in_array($params['meal'], $validMeals))
+    {
+        echo "<h3>We don't serve {$params['meal']}.</h3>";
+    }else{
+        $time = '';
+        switch ($params['meal']){
+            case 'breakfast':
+                $time = " in the morning"; break;
+            case 'lunch':
+                $time = " at noon"; break;
+            case 'dinner':
+                $time = " in the evening"; break;
+        }
+        echo "<h3>I like {$params['food']} for {$params['meal']}$time.</h3>";
+    }
+});
+
+//define a route to display the order form
+$f3->route('GET /order', function(){
+    $view = new View();
+    echo $view->render('views/form1.html');
+});
+
+//define a route to process orders
+$f3->route('POST /order-process', function(){
+    print_r($_POST);
+    echo "Processing Order";
 });
 
 //run fat free
