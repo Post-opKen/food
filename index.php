@@ -19,11 +19,28 @@ $f3 = Base::instance();
 $f3->set('DEBUG', 3);
 
 //define a default route
-$f3->route('GET /', function(){
-    $view = new View;
-    echo $view->render('views/home.html');
+$f3->route('GET /', function($f3){
+    //save variables
+    $f3->set('username','jshmo');
+    $f3->set('password', sha1('Password01'));
+    $f3->set('title','Working with Templates');
+
+    //load a template
+    $template = new Template();
+    echo $template->render('views/info.html');
 });
 
+//run fat free
+$f3->run();
+
+
+
+
+
+
+
+
+/*
 //define a pancakes route
 $f3->route('GET /breakfast/pancakes', function(){
     $view = new View();
@@ -103,6 +120,5 @@ $f3->route('GET /dessert/@dessert', function($f3, $params){
         $f3->error(404);
     }
 });
+*/
 
-//run fat free
-$f3->run();
